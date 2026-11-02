@@ -1,6 +1,10 @@
 # Jarvis
 
-Bilingual (English / Hindi) voice assistant. **Next.js** UI + **FastAPI** backend.
+Bilingual (English / Hindi) voice assistant that runs on your own computer and needs **no API key**. **Next.js** UI + **FastAPI** backend.
+
+![Jarvis home screen](docs/images/01-home-light.png)
+
+**Highlights:** voice or text in English and Hindi, wake word ("Hey Jarvis") and renamable assistant, spoken email with an address book, Word / Excel / PowerPoint templates, a document studio (Word and PDF with pictures), and chat with your own documents (ChromaDB).
 
 **Full documentation (overview, install, user guide, command list, API, security, licences, test results): [docs/README.md](docs/README.md).**
 
@@ -120,4 +124,18 @@ Add a rule in `backend/jarvis/commands.py` (`route()`), strings in `backend/jarv
 ## Security notes
 
 - The backend binds to 127.0.0.1 and only accepts CORS from localhost:3000.
-- The old scripts contain a plain-text Gmail password. Change that password and delete it from them.
+- Never commit `backend/.env`, `backend/data/` or `backend/outputs/` (they are in `.gitignore`).
+- There is no login: run it only on your own computer. See [Security and privacy](docs/07-SECURITY-PRIVACY.md).
+
+## Tests
+
+```bash
+cd backend
+.venv\Scripts\python -m pytest
+```
+
+83 tests. The 193 command checks are listed in [docs/TEST-RESULTS.md](docs/TEST-RESULTS.md).
+
+## Licence
+
+No licence has been chosen yet. All rights reserved by the author until one is added.
