@@ -38,14 +38,14 @@ BLOCKS = [
 
 
 def spec(**kw):
-    return {"title": "Quarterly Report", "subtitle": "Q3 2026", "author": "Zeeshan", "blocks": BLOCKS, **kw}
+    return {"title": "Quarterly Report", "subtitle": "Q3 2026", "author": "Asha", "blocks": BLOCKS, **kw}
 
 
 def test_docx_has_every_part():
     d = docx.Document(io.BytesIO(docbuilder.build(spec(), "docx")))
     texts = [p.text for p in d.paragraphs]
     assert d.paragraphs[0].text == "Quarterly Report" and d.paragraphs[0].style.name == "Title"
-    assert "Q3 2026 · Zeeshan" in texts
+    assert "Q3 2026 · Asha" in texts
     assert [p.text for p in d.paragraphs if p.style.name == "Heading 1"] == ["Introduction"]
     assert [p.text for p in d.paragraphs if p.style.name == "Heading 2"] == ["Second page"]
     assert [p.text for p in d.paragraphs if p.style.name == "List Bullet"] == ["first point", "second point"]

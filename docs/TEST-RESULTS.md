@@ -2,6 +2,8 @@
 
 Run on 02 November 2026. **193 of 193 command checks passed**, and the **83 automated backend tests passed** (`cd backend && .venv\Scripts\python -m pytest`). The frontend type check (`npx tsc --noEmit`) is clean.
 
+Personal details such as the IP address, MAC address and folder names were replaced with examples.
+
 Every line below is one thing you can say or do. It was run against the real Jarvis code in a sandbox: temporary data, and no real browser tab, program, music player, shutdown or email was started. Weather and currency used the real internet.
 
 | Area | Passed |
@@ -53,8 +55,8 @@ Every line below is one thing you can say or do. It was run against the real Jar
 |---|---|---|---|
 | PASS | `what is the time` | the time | The time is 03:16 PM. |
 | PASS | `what is the date` | today's date | Today is Monday, 02 November 2026. |
-| PASS | `what is my ip address` | an IP address | Your IP address is 192.168.1.106. |
-| PASS | `what is my mac address` | a MAC address | Your MAC address is 87:40:ba:35:73:61. |
+| PASS | `what is my ip address` | an IP address | Your IP address is 192.0.2.10. |
+| PASS | `what is my mac address` | a MAC address | Your MAC address is 00:00:5e:00:53:01. |
 | PASS | `समय क्या है` | Hindi time | अभी समय है 03:16 PM। |
 | PASS | `आज की तारीख क्या है` | Hindi date | आज की तारीख है Monday, 02 November 2026। |
 
@@ -155,16 +157,16 @@ Every line below is one thing you can say or do. It was run against the real Jar
 |---|---|---|---|
 | PASS | `play believer` | no folder saved: asks where your songs are | Where are your songs? Type the folder path, for example D:\Music. Or say skip to use YouTube instead. |
 | PASS | `relative\path` | refuses a non-absolute path | I can't find the folder relative\path. Type the full path, like D:\Music, or say skip to use YouTube. |
-| PASS | `C:\Users\Zeeshan\AppData\Local\Temp\jarvis-check-6viuzpx7\Music` | saves the folder and plays Believer.mp3 | [opened] Saved C:\Users\Zeeshan\AppData\Local\Temp\jarvis-check-6viuzpx7\Music as your music folder. Playing Believer. |
+| PASS | `D:\Music` | saves the folder and plays Believer.mp3 | [opened] Saved D:\Music as your music folder. Playing Believer. |
 | PASS | `play shape of you` | next time: plays at once, no question | [opened] Playing Shape of You. |
 | PASS | `play shape` | 2 matches: asks for a number | I found 2 matching songs: 1. Shape of You, 2. Shape of Water. Say the number you want. |
 | PASS | `seven` | bad number: asks again | Please say a number from 1 to 2. |
 | PASS | `2` | plays Shape of Water | [opened] Playing Shape of Water. |
 | PASS | `play thunderstruck` | not in folder: says so and plays from YouTube | [opened] I couldn't find thunderstruck in your music folder. Playing thunderstruck. |
-| PASS | `where is my music folder` | tells the saved folder | Your music folder is C:\Users\Zeeshan\AppData\Local\Temp\jarvis-check-6viuzpx7\Music. |
+| PASS | `where is my music folder` | tells the saved folder | Your music folder is D:\Music. |
 | PASS | `use youtube for songs` | switches to YouTube | Okay, I will play songs from YouTube. Say set music folder to use a folder again. |
 | PASS | `play believer` | now goes to YouTube | [opened] Playing believer. |
-| PASS | `set music folder to C:\Users\Zeeshan\AppData\Local\Temp\jarvis-check-6viuzpx7\Music` | back to the folder | Saved C:\Users\Zeeshan\AppData\Local\Temp\jarvis-check-6viuzpx7\Music as your music folder. |
+| PASS | `set music folder to D:\Music` | back to the folder | Saved D:\Music as your music folder. |
 | PASS | `play believer` | plays from the folder again | [opened] Playing Believer. |
 | PASS | `set music folder` | asks for the path | Where are your songs? Type the folder path, for example D:\Music. Or say skip to use YouTube instead. |
 | PASS | `cancel` | cancels | Okay, cancelled. |
@@ -190,11 +192,11 @@ Every line below is one thing you can say or do. It was run against the real Jar
 | PASS | `no` | does not send; cancelled | Okay, cancelled. |
 | PASS | `send an email to a@b.com saying hello there` | goes straight to CC | [reply_options] Any CC? Say a name or email address, or say skip. |
 | PASS | `cancel` | cancels the email | Okay, cancelled. |
-| PASS | `send an email to sam at finance dot com` | spoken address understood, asks CC | [reply_options] Any CC? Say a name or email address, or say skip. |
-| PASS | `sam at finance dot com` | CC to the same address is accepted | [reply_options] Any BCC? Say a name or email address, or say skip. |
+| PASS | `send an email to sam at example dot com` | spoken address understood, asks CC | [reply_options] Any CC? Say a name or email address, or say skip. |
+| PASS | `sam at example dot com` | CC to the same address is accepted | [reply_options] Any BCC? Say a name or email address, or say skip. |
 | PASS | `skip` | asks subject | [reply_options] What is the subject? Say skip and I will write one for you. |
-| PASS | `holiday plan` | subject accepted, asks the message | What should the mail to sam@finance.com say? |
-| PASS | `regarding holiday from 16 November to 27 November 2026` | the whole long sentence reaches the draft | [asks yes/no] [mail_draft] Draft ready for sam@finance.com. Shall I open it in Gmail so you can press Send? |
+| PASS | `holiday plan` | subject accepted, asks the message | What should the mail to sam@example.com say? |
+| PASS | `regarding holiday from 16 November to 27 November 2026` | the whole long sentence reaches the draft | [asks yes/no] [mail_draft] Draft ready for sam@example.com. Shall I open it in Gmail so you can press Send? |
 | PASS | `send mail` | asks who to send to | Who should I send it to? Say a name or an email address. |
 | PASS | `cancel` | cancels | Okay, cancelled. |
 | PASS | `ईमेल भेजो ravi@gmail.com को` | Hindi email flow starts | [reply_options] कोई CC? नाम या ईमेल पता बोलें, या कहें स्किप। |
@@ -217,13 +219,13 @@ Every line below is one thing you can say or do. It was run against the real Jar
 | PASS | `make an excel sheet` | format preset to xlsx | [form] Type the title and content, and I will make the file. |
 | PASS | `make a powerpoint` | format preset to pptx | [form] Type the title and content, and I will make the file. |
 | PASS | `छुट्टी का आवेदन बनाओ` | Hindi: leave form | [form] छुट्टी का आवेदन के विवरण भरें। |
-| PASS | `[fill the leave form and press Create]` | a real file is created | Leave-application-Zeeshan.docx |
-| PASS | `[fill the resignation form and press Create]` | a real file is created | Resignation-Zeeshan.docx |
+| PASS | `[fill the leave form and press Create]` | a real file is created | Leave-application-Asha.docx |
+| PASS | `[fill the resignation form and press Create]` | a real file is created | Resignation-Asha.docx |
 | PASS | `[fill the invoice form and press Create]` | a real file is created | Invoice-INV-1.xlsx |
 | PASS | `[fill the budget form and press Create]` | a real file is created | Budget-Monthly.xlsx |
 | PASS | `[fill the minutes form and press Create]` | a real file is created | Minutes-Weekly.docx |
 | PASS | `[fill the todo form and press Create]` | a real file is created | Checklist-Trip.docx |
-| PASS | `[fill the resume form and press Create]` | a real file is created | Resume-Zeeshan.docx |
+| PASS | `[fill the resume form and press Create]` | a real file is created | Resume-Asha.docx |
 | PASS | `[blank document as .docx]` | a .docx file is created | Test.docx |
 | PASS | `[blank document as .xlsx]` | a .xlsx file is created | Test.xlsx |
 | PASS | `[blank document as .pptx]` | a .pptx file is created | Test.pptx |

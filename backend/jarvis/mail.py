@@ -97,7 +97,7 @@ def normalize_spoken(s: str) -> str:
     """'ravi at gmail dot com' -> 'ravi@gmail.com' (English and Hindi speech)."""
     s = re.sub(r"\s*(?:at the rate(?: of)?|at sign|एट द रेट|एट दी रेट)\s*", "@", s, flags=re.I)
     domain = r"(?=[\w-]+(?:\.[a-z]{2,}\b|\s+(?:dot|डॉट|डाट)\s+[a-z]{2,}))"
-    s = re.sub(r"\s+at\s+(?:that|the|d)\s+" + domain, "@", s, flags=re.I)  # heard "at that finance.com"
+    s = re.sub(r"\s+at\s+(?:that|the|d)\s+" + domain, "@", s, flags=re.I)  # heard "at that example.com"
     s = re.sub(r"\s+at\s+" + domain, "@", s, flags=re.I)
     s = re.sub(r"\s+(?:at|एट)\s+(?=\S+\s+(?:dot|डॉट|डाट)\s+)", "@", s, flags=re.I)
     s = re.sub(r"\s+(?:dot|डॉट|डाट)\s+", ".", s, flags=re.I)

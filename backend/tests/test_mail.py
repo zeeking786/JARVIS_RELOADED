@@ -174,9 +174,9 @@ def test_other_commands_not_hijacked():
 
 def test_spoken_at_that_does_not_swallow_the_body():
     # "at that" is how speech recognition writes "@"; it used to be read as the word "that" (= start of the message)
-    assert mail.find_email("Ravi dot Shamsher at that finance.com") == "ravi.shamsher@finance.com"
-    assert mail._parse_en("can you send an email to Ravi at that finance.com")["body"] == ""
-    ask("can you send an email to Ravi dot Shamsher at that finance.com")
+    assert mail.find_email("Ravi dot Sharma at that example.com") == "ravi.sharma@example.com"
+    assert mail._parse_en("can you send an email to Ravi at that example.com")["body"] == ""
+    ask("can you send an email to Ravi dot Sharma at that example.com")
     ask("skip"); ask("skip")  # cc, bcc
     assert "What should the mail" in ask("skip").reply  # subject skipped -> now it asks for the message
     r = ask("regarding holiday from 16 November to 27 November 2026")
