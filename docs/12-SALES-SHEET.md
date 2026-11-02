@@ -16,7 +16,7 @@ Talk or type, in **English or Hindi**. It answers, sets reminders, keeps your ta
 - **Your own assistant.** Give it any name. "Hey [NAME], good morning."
 - **Real documents.** Headings, bold, lists, tables and pictures, saved as Word or PDF.
 - **Safe.** It always asks before it shuts the computer down or sends an email.
-- **Open and documented.** Clear guides, a documented API, 83 automated tests and 193 command checks that pass.
+- **Open and documented.** Clear guides, a documented API, 84 automated tests and 193 command checks that pass.
 
 ## Things you can say
 

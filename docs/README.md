@@ -13,8 +13,9 @@ Version 1.0.
 | 5 | [Architecture](05-ARCHITECTURE.md) | Developers: how it is built and how to extend it |
 | 6 | [API reference](06-API-REFERENCE.md) | Developers: every backend endpoint with real examples |
 | 7 | [Security and privacy](07-SECURITY-PRIVACY.md) | Buyers, IT and security reviewers |
+| – | [Security scan report](SECURITY-SCAN.md) | Security reviewers: what was scanned, what was fixed |
 | 8 | [FAQ and troubleshooting](08-FAQ-TROUBLESHOOTING.md) | Everyone |
-| – | [Test results](TEST-RESULTS.md) | Buyers and developers: 193 command checks, 83 automated tests |
+| – | [Test results](TEST-RESULTS.md) | Buyers and developers: 193 command checks, 84 automated tests |
 | 9 | [Third-party licences and compliance](09-LICENSES-AND-COMPLIANCE.md) | Buyers, lawyers, and the seller |
 | 10 | [Roadmap, limits and release notes](10-ROADMAP-AND-RELEASE-NOTES.md) | Everyone |
 | 11 | [Selling checklist](11-SELLING-CHECKLIST.md) | **The seller only.** Do not hand this one to customers |

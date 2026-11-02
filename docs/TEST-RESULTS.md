@@ -1,6 +1,6 @@
 # Jarvis test results
 
-Run on 02 November 2026. **193 of 193 command checks passed**, and the **83 automated backend tests passed** (`cd backend && .venv\Scripts\python -m pytest`). The frontend type check (`npx tsc --noEmit`) is clean.
+Run on 02 November 2026. **193 of 193 command checks passed**, and the **84 automated backend tests passed** (`cd backend && .venv\Scripts\python -m pytest`). The frontend type check (`npx tsc --noEmit`) is clean.
 
 Personal details such as the IP address, MAC address and folder names were replaced with examples.
 

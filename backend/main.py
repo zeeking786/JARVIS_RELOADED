@@ -5,6 +5,7 @@ import urllib.parse
 
 from fastapi import FastAPI, File, Form, HTTPException, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.middleware.trustedhost import TrustedHostMiddleware
 from fastapi.responses import FileResponse
 from typing import Literal
 
@@ -14,6 +15,7 @@ from jarvis import brain, config, docbuilder, documents, engine, mail, rag, sett
 from jarvis.i18n import t
 
 app = FastAPI(title="Jarvis")
+app.add_middleware(TrustedHostMiddleware, allowed_hosts=config.ALLOWED_HOSTS)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=config.ALLOWED_ORIGINS,

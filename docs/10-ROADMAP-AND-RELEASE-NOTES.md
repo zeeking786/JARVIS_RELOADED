@@ -30,7 +30,7 @@
 
 **Safety and quality**
 - Shutdown and email always ask first.
-- 83 automated tests and 193 command checks pass. See [Test results](TEST-RESULTS.md).
+- 84 automated tests and 193 command checks pass. See [Test results](TEST-RESULTS.md).
 
 ## Known limits
 

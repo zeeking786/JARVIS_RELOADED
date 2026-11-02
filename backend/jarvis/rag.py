@@ -138,7 +138,7 @@ def chunk_text(text: str, size: int = CHUNK_CHARS, overlap: int = CHUNK_OVERLAP)
 
 
 def _sid(source: str) -> str:
-    return hashlib.sha1(source.encode("utf-8")).hexdigest()[:12]
+    return hashlib.sha1(source.encode("utf-8"), usedforsecurity=False).hexdigest()[:12]
 
 
 def index_text(source: str, text: str, origin: str = "upload", stamp: str = "") -> int:

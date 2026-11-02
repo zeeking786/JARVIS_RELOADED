@@ -29,6 +29,8 @@ def ask_wikipedia(query: str, lang: str) -> str | None:
     headers = {"User-Agent": "JarvisAssistant/1.0"}
 
     def get(url):
+        if not url.startswith("https://"):
+            raise ValueError("only https addresses are allowed")
         req = urllib.request.Request(url, headers=headers)
         with urllib.request.urlopen(req, timeout=6) as r:
             return json.load(r)

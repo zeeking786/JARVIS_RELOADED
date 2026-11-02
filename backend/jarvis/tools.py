@@ -140,6 +140,8 @@ def _currency(tok: str, other: str):
 
 
 def _fetch_json(url: str):
+    if not url.startswith("https://"):
+        raise ValueError("only https addresses are allowed")
     req = urllib.request.Request(url, headers={"User-Agent": "JarvisAssistant/1.0"})
     with urllib.request.urlopen(req, timeout=8) as r:
         return json.load(r)

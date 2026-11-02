@@ -18,6 +18,7 @@ Settings live in `backend\.env` (copy it from `backend\.env.example`). The file 
 | `RAG_EMBEDDER` | `auto` | Document-search method. `auto` uses the local MiniLM model and falls back to keyword matching if it cannot be loaded. `default` forces the model. `hash` forces keyword matching (no download). |
 | `OUTPUT_DIR` | `backend\outputs` | Where generated files are saved. |
 | `DATA_DIR` | `backend\data` | Where contacts, notes, tasks, settings and the document index are saved. |
+| `ALLOWED_HOSTS` | `127.0.0.1,localhost,testserver` | Host names the backend answers to. Protects against DNS rebinding. Change only if you open Jarvis under another name. |
 | `ALLOWED_ORIGINS` | `http://localhost:3000,http://127.0.0.1:3000` | Pages allowed to call the backend. Change only if you serve the front end from another address. |
 
 ## Turning on email sending

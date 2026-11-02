@@ -75,4 +75,4 @@ More detail is in [Roadmap, limits and release notes](10-ROADMAP-AND-RELEASE-NOT
 
 ## How well it works
 
-193 command checks across 18 areas passed, and 83 automated tests pass. See [Test results](TEST-RESULTS.md) for every line. Voice input and speech output need a real microphone and speakers, so those parts are not covered by the automated checks.
+193 command checks across 18 areas passed, and 84 automated tests pass. See [Test results](TEST-RESULTS.md) for every line. Voice input and speech output need a real microphone and speakers, so those parts are not covered by the automated checks.

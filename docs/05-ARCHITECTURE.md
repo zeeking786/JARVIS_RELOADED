@@ -118,7 +118,7 @@ Long requests, attached files, and requests starting with words like "write" or 
 
 | What | How |
 |---|---|
-| Backend tests | `cd backend && .venv\Scripts\python -m pytest` (83 tests, about 10 seconds) |
+| Backend tests | `cd backend && .venv\Scripts\python -m pytest` (84 tests, about 10 seconds) |
 | Front end types | `cd frontend && npx tsc --noEmit` |
 | Full command check | See [Test results](TEST-RESULTS.md) for the 193 checks that were run |
 

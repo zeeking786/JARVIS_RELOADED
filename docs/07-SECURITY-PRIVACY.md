@@ -47,6 +47,7 @@ See [Configuration and administration](04-CONFIGURATION.md#where-your-data-is-st
 | Hidden instructions inside documents, web pages or Wikipedia text | Text from files, tools and websites is handled as data, never as instructions to Jarvis. |
 | Oversized or malformed uploads | Uploads are limited to 20 MB, pictures in the studio to 10 MB, and unreadable files are refused with a message. |
 | Other websites calling the backend from your browser | The backend only accepts calls from `localhost:3000` and `127.0.0.1:3000`. |
+| A web page pointing its own name at your computer (DNS rebinding) | The backend answers only to the host names `127.0.0.1` and `localhost` (setting `ALLOWED_HOSTS`). See the [security scan report](SECURITY-SCAN.md). |
 | Programs started by commands | Only a fixed list (Notepad, Command Prompt, Chrome, Calculator) and music files from the folder you chose. No command text is run in a shell. |
 
 ## Limits you should know about

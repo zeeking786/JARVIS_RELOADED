@@ -134,7 +134,7 @@ cd backend
 .venv\Scripts\python -m pytest
 ```
 
-83 tests. The 193 command checks are listed in [docs/TEST-RESULTS.md](docs/TEST-RESULTS.md).
+84 tests. The 193 command checks are listed in [docs/TEST-RESULTS.md](docs/TEST-RESULTS.md).
 
 ## Licence
 

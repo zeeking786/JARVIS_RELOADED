@@ -98,3 +98,17 @@ def test_short_commands_still_local_with_claude(monkeypatch):
     monkeypatch.setattr(brain, "claude_enabled", lambda: True)
     monkeypatch.setattr(agent, "run", lambda *a, **k: pytest.fail("agent should not run"))
     assert "time" in engine.handle("s3", "what is the time", "en").reply.lower()
+
+
+def test_api_only_answers_to_the_computer_itself():
+    """A web page using DNS rebinding reaches the API with its own host name. That must be refused."""
+    from fastapi.testclient import TestClient
+
+    import main
+
+    c = TestClient(main.app)
+    assert c.get("/api/health").status_code == 200
+    assert c.get("/api/health", headers={"Host": "127.0.0.1:8000"}).status_code == 200
+    assert c.get("/api/health", headers={"Host": "localhost:8000"}).status_code == 200
+    assert c.get("/api/health", headers={"Host": "evil.example:8000"}).status_code == 400
+    assert c.post("/api/command", json={"text": "hello"}, headers={"Host": "attacker.test"}).status_code == 400
