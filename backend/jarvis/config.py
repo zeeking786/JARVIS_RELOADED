@@ -5,8 +5,8 @@ from dotenv import load_dotenv
 load_dotenv()
 
 ANTHROPIC_API_KEY = os.getenv("ANTHROPIC_API_KEY", "").strip()
-JARVIS_MODEL = os.getenv("JARVIS_MODEL", "claude-haiku-5-5")
-JARVIS_AGENT_MODEL = os.getenv("JARVIS_AGENT_MODEL", "claude-sonnet-5-5")
+JARVIS_MODEL = os.getenv("JARVIS_MODEL", "").strip() or "claude-haiku-5-5"  # blank in .env means "use the default"
+JARVIS_AGENT_MODEL = os.getenv("JARVIS_AGENT_MODEL", "").strip() or "claude-sonnet-5-5"
 OUTPUT_DIR = os.getenv("OUTPUT_DIR", os.path.join(os.path.dirname(os.path.dirname(__file__)), "outputs"))
 DATA_DIR = os.getenv("DATA_DIR", os.path.join(os.path.dirname(os.path.dirname(__file__)), "data"))
 MUSIC_DIR =os.getenv("MUSIC_DIR", "").strip()
