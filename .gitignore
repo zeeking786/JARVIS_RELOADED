@@ -1,0 +1,15 @@
+.env
+.venv/
+__pycache__/
+node_modules/
+.next/
+*.mp3
+backend/outputs/
+backend/data/
+
+# personal / coursework files, not part of the product
+BlackBook Report.pdf
+Presentation new.pptx
+
+# seller-only notes: never publish
+docs/11-SELLING-CHECKLIST.md

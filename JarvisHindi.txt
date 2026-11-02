@@ -1,0 +1,466 @@
+import speech_recognition as sr
+import datetime
+import wikipedia
+import webbrowser
+import os
+import turtle
+from gtts import gTTS
+import smtplib
+import pyglet
+import cv2
+import sounddevice as sd
+from scipy.io.wavfile import write
+
+from email.mime.multipart import MIMEMultipart 
+from email.mime.text import MIMEText 
+from email.mime.base import MIMEBase 
+from email import encoders
+
+import playsound
+import time
+import random
+import wolframalpha
+from tkinter import *
+import tkinter
+from PIL import ImageTk, Image
+import PIL.Image
+import socket
+import uuid
+
+from JarvisEng import *
+import JarvisEng as e
+
+client = wolframalpha.Client('Your ID')
+root = ""
+
+num = 100
+def speak(output): 
+	global num 
+	num += 1
+	print(output) 
+	toSpeak1 = gTTS(text = output, lang ='hi', slow = False) 
+	file1 = str(num)+".mp3 "
+	toSpeak1.save(file1) 
+	playsound.playsound(file1, True) 
+	os.remove(file1)
+
+def JoCommand(): 
+        rObject = sr.Recognizer() 
+        audio = '' 
+        with sr.Microphone() as source: 
+            print("बोले...")	
+            audio = rObject.listen(source, phrase_time_limit = 5) 
+            print("रुकें..")
+
+            try: 
+                query = rObject.recognize_google(audio, language ='hi') 
+                print(" आप: ", query) 
+
+                return query
+
+            except: 
+                speak("आपका ऑडियो समझ नहीं सका, कृपया फिर से प्रयास करें!") 
+                return 0
+
+	
+def greetMe():
+    hour = int(datetime.datetime.now().hour)
+    if hour>=0 and hour<12:
+        speak("शुभ प्रभात!")
+
+    elif hour>=12 and hour<18:
+        speak("नमस्कार!")   
+
+    else:
+        speak("सुसंध्या!")
+
+def shutdown():
+    speak("मैं समझ गया सर")
+    speak('कमांड प्रॉम्प्ट से कनेक्ट कर रहा है')
+    speak('आपका कंप्यूटर बंद हो रहा है')
+    os.system('shutdown -s')
+
+def gooffline():
+    speak('जी महोदय')
+    speak('सभी सिस्टम बंद हो रहे हैं')
+    speak('सर्वर के साथ डिस्कनेक्ट हो रहे हैं')
+    speak('ऑफ़लाइन हो रहा है')
+    quit()
+
+class Widget:
+    def __init__(self):
+            global root
+            root = Tk()
+            root.title('ज़ायकौर')
+            root.config(background='Red')
+            root.geometry('225x600')
+            root.resizable(0, 0)
+            
+            root.iconbitmap(r'D:\Jarvis\check\Untitled-1.ico')
+            img = ImageTk.PhotoImage(PIL.Image.open(r"download.png"))
+            panel = Label(root, image = img)
+            panel.pack(side = "bottom", fill = "both", expand = "no")
+
+            self.compText = StringVar()
+            self.userText = StringVar()
+            self.userText.set('MyCommands देने के लिए \ Start Listeningपर क्लिक करें')
+            userFrame = LabelFrame(root, text="उपयोगकर्ता", font=('Black ops one', 10, 'bold'))
+            userFrame.pack(fill="both", expand="yes")
+            left2 = Message(userFrame, textvariable=self.userText, bg='dodgerBlue', fg='white')
+            left2.config(font=("Comic Sans MS", 10, 'bold'))
+            left2.pack(fill='both', expand='yes')
+            compFrame = LabelFrame(root, text="ज़ायकौर", font=('Black ops one', 10, 'bold'))
+            compFrame.pack(fill="both", expand="yes")
+            left1 = Message(compFrame, textvariable=self.compText, bg='Red',fg='white')
+            left1.config(font=("Comic Sans MS", 10, 'bold'))
+            left1.pack(fill='both', expand='yes')
+            btn = Button(root, text='Start Listening!', font=('Black ops one', 10, 'bold'), bg='deepSkyBlue', fg='white',command=self.assistant).pack(fill='x', expand='no')
+            btn2 = Button(root, text='Close!', font=('Black Ops One', 10, 'bold'), bg='deepSkyBlue', fg='white',command=root.destroy).pack(fill='x', expand='no')
+            btn3 = Button(root, text='Change Language !', font=('Black Ops One', 10, 'bold'), bg='deepSkyBlue', fg='white',command=self.changeLang).pack(fill='x', expand='no')
+            speak('हैलो, मैं ज़ायकौर हूँ!')
+            self.compText.set('हैलो, मैं ज़ायकौर हूँ!')
+            root.bind("<Return>", self.assistant)
+            root.mainloop()
+
+    def changeLang(self):
+            speak("अंग्रेजी या हिंदी के बीच की भाषा लें")
+            text = get_audio().lower()
+            if text == 0:
+                self.checkLang()
+            elif "अंग्रेज़ी" in text:
+                speak("भाषा अंग्रेजी में बदल गई")
+                root.destroy()
+                e.Widget()
+            elif "हिंदी" in text:
+                speak("भाषा हिंदी में बदल गई")
+            else:
+                speak("भाषा उपलब्ध नहीं है")
+                self.changeLang()
+            
+    def assistant(self):
+                        speak("मै आप के लिये क्य कर सक्त हु")
+                        self.compText.set("मै आप के लिये क्य कर सक्त हु")
+                        self.compText.set("ठीक है...")
+                        query = JoCommand()
+                        self.userText.set(query)       
+                        while True:
+                                if query == 0: 
+                                        continue
+                                elif "बाहर जाएं" in query or "अलविदा" in query or "सो जाओ" in query:
+                                        self.compText.set("ठीक है")
+                                        speak("चलो बाय ") 
+                                        break
+                                elif 'यूट्यूब खोलें' in query:
+                                        self.compText.set("थोड़ी देर इंतजार करो")
+                                        speak("यूट्यूब खोलना")
+                                        webbrowser.open("https://www.youtube.com")
+                                        break
+
+                                elif 'मुझे विश्लेषण दिखाओ' in query:
+                                        self.compText.set("विश्लेषण कर रहा है ...")
+                                        speak("विश्लेषण कर रहा है ...")
+                                        url = 'https://hindime.net/website-kya-hai-hindi/'
+                                        article = Article(url) 
+                                        article.download() 
+                                        article.parse() 
+                                        #nltk.download('punkt')
+                                        article.nlp()
+                                        text1 = article.summary
+                                        print(text1)
+                                        obj = TextBlob(text1)
+                                        sentiment = obj.sentiment.polarity
+                                        ans1=float('{0:.2g}'.format(sentiment*100))
+                                        speakData = str(ans1)+'%'
+                                        print(speakData)
+                                        speak(speakData)
+                                        if ans1 == 0:
+                                                self.compText.set('पाठ तटस्थ है')
+                                                speak('पाठ तटस्थ है')
+                                        elif ans1 > 0:
+                                                self.compText.set('पाठ सकारात्मक है')
+                                                speak('पाठ सकारात्मक है')
+                                        else:
+                                                self.compText.set('पाठ नकारात्मक है')
+                                                speak('पाठ नकारात्मक है')
+                                        break
+
+                                elif 'गूगल खोलो' in query:
+                                        self.compText.set("थोड़ी देर इंतजार करो")
+                                        speak("गूगल खोलना")
+                                        webbrowser.open("https://www.google.com")
+                                        break
+
+                                elif 'खुला जीमेल' in query:
+                                        self.compText.set("थोड़ी देर इंतजार करो")
+                                        speak("मेल खोलना")
+                                        webbrowser.open("Your mail link")
+                                        break
+
+                                elif 'बंद करना' in query:
+                                        self.compText.set("थोड़ी देर इंतजार करो")
+                                        shutdown()
+                                        break
+
+                                elif 'सीएमडी खोलें'in query or 'ओपन कमांड प्रॉम्प्ट' in query:
+                                        self.compText.set("ओपन प्रॉम्प्ट")
+                                        speak("ओपन प्रॉम्प्ट")
+                                        os.system("start cmd")
+                                        break
+
+                                elif 'नोटपैड खोलें'in query:
+                                        self.compText.set("पैड खोलना")
+                                        speak("पैड खोलना")
+                                        os.system("notepad.exe")
+                                        break
+                                
+                                elif 'मेरी तस्वीर ले लो 'in query:
+                                        self.compText.set("काम चल रहा है")
+                                        speak("काम चल रहा है")
+                                        camera_port = 0
+
+                                        ramp_frames = 1
+
+                                        camera = cv2.VideoCapture(camera_port)
+
+                                        def get_image():
+                                                retval, im = camera.read()
+                                                return im
+
+                                        for i in range(ramp_frames):
+                                                temp = get_image()
+                                                speak("छवि ले रहा है ...")
+
+                                        camera_capture = get_image()
+                                        file =r"path where you have to save your image"
+
+                                        cv2.imwrite(file, camera_capture)
+
+                                        del(camera)
+                                        speak("समाप्त")
+                                        break
+
+                                elif 'समय' in query:
+                                        strTime = datetime.datetime.now().strftime("%H:%M:%S")
+                                        self.compText.set("थोड़ी देर इंतजार करो")
+                                        speak("सर टाइम है"+ strTime)
+                                        break
+
+                                elif 'मेरी आवाज कैसी है?' in query:
+                                            speak("आप बस इसे रिकॉर्ड करें और खुद सुनें")
+                                            fs = 44100  # this is the frequency sampling; also: 4999, 64000
+                                            seconds = 10 # Duration of recording
+
+                                            myrecording = sd.rec(int(seconds * fs), samplerate=fs, channels=2)
+                                            speak("शुरू: अब बोलो!")
+                                            sd.wait()  # Wait until recording is finished
+                                            speak("समाप्त")
+                                            write('output.mp4', fs, myrecording)  # Save as WAV file
+                                            os.startfile("output.mp4")
+                                            speak("अब इसे सुनें और विचार करें")
+                                            break            
+                                        
+                                elif 'खुला क्रोम' in query:
+                                        self.compText.set("क्रोम खुल रहा है")
+                                        speak("क्रोम खुल रहा है")
+                                        webbrowser.open('https://www.google.com/chrome/')
+                                        break
+                                elif 'आप सब कुछ कैसे करते हैं'in query:
+                                        self.compText.set("मैं आपको अपना बैकप्रोसेस नहीं दिखा सकता लेकिन छवि में मैं आपको बैकप्रोसेस दिखा सकता हूं")
+                                        speak("मैं आपको अपना बैकप्रोसेस नहीं दिखा सकता लेकिन छवि में मैं आपको बैकप्रोसेस दिखा सकता हूं")
+                                        ag_file = "ts1.gif"
+                                        animation = pyglet.resource.animation(ag_file)
+                                        sprite = pyglet.sprite.Sprite(animation)
+                                        
+                                        win = pyglet.window.Window(width=sprite.width, height=sprite.height)
+                                        
+                                        green = 0, 1, 0, 1
+                                        pyglet.gl.glClearColor(*green)
+                                        @win.event
+                                        def on_draw():
+                                                win.clear()
+                                                sprite.draw()
+                                        def on_close(event):
+                                                win.on_close()
+                                        pyglet.clock.schedule_once(on_close, 8.0)
+                                        pyglet.app.run()
+                                        pyglet.app.exit()
+                                    
+                                        speak("इस तरह मैं आदेशों का प्रबंधन करता हूं :)")
+                                        break
+
+                                elif 'आप कैसे हैं ' in query:
+                                        self.compText.set('मैं ठीक हूं और आपके सहायक होने के लिए पूरी तरह तैयार हूं')
+                                        speak('मैं ठीक हूं और आपके सहायक होने के लिए पूरी तरह तैयार हूं')
+                                        break
+                    
+                                elif 'तुम्हारा नाम क्या हे ' in query:
+                                        self.compText.set('मैं ज़ायकौर हूं ... मैं विश्वविद्यालय और कॉलेज के लिए उच्च स्तरीय परियोजना हूं।')
+                                        speak('मैं ज़ायकौर हूं ... मैं विश्वविद्यालय और कॉलेज के लिए उच्च स्तरीय परियोजना हूं।')
+                                        break
+
+                                elif 'सिस्टम बंद करो' in query:
+                                        self.compText.set("काम चल रहा है")
+                                        gooffline()
+                                        break
+                                    
+
+                                elif 'खुले ट्यूटोरियल' in query:
+                                        self.compText.set("ट्यूटोरियल खोलना")
+                                        speak("ट्यूटोरियल खोलना")
+                                        webbrowser.open('https://www.tutorialspoint.com')
+                                        break
+
+                                elif 'खुले जीजेफोर्गेस' in query:
+                                        self.compText.set("प्रारंभिक geeksforgeeks")
+                                        speak("प्रारंभिक geeksforgeeks")
+                                        webbrowser.open('https://www.geeksforgeeks.org')
+                                        break
+                                    
+                                elif 'खुला javatpoint' in query:
+                                        self.compText.set("ओपनिंग ज्वॉइंटपॉइंट")
+                                        speak("ओपनिंग ज्वॉइंटपॉइंट")
+                                        webbrowser.open('https://www.javatpoint.com')
+                                        break
+
+                                elif 'ऑनलाइन संगीत बजाओ' in query:
+                                        self.compText.set("संगीत बज रहा है ...")
+                                        speak("संगीत बज रहा है ...")
+                                        webbrowser.open('https://play.google.com/music/listen#/sr/'+query)
+                                        break
+                                    
+                                elif 'गीत बजाओ' in query:
+                                        speak("Which song u have to play ??")
+                                        m=JoCommand.lower()
+                                        file=('your music library path')
+                                        d=file+m+".mp3"
+                                        s=os.listdir(file)
+                                        os.startfile(os.path.join(file,d))
+                                        break
+                                    
+                                elif 'खुला कोड' in query:
+                                        self.compText.set('खुलने का इंतजार करें')
+                                        speak('खुलने का इंतजार करें')
+                                        codePath = 'path where hindi jarvis code is store' 
+                                        os.startfile(codePath)
+                                        break
+
+                                elif 'मेरा आईपी क्या है' in query:
+                                        speak("एक मिनट रुकिए...")
+                                        ip_address = socket.gethostbyname(socket.gethostname())
+                                        self.compText.set(ip_address)
+                                        print(ip_address)
+                                        speak(ip_address)
+                                        break
+
+                                elif 'मेरा मैक पता बताओ' in query:
+                                        speak("एक मिनट रुकिए...")
+                                        macaddress = getmac.get_mac_address()
+                                        self.compText.set(macaddress)
+                                        print(macaddress)
+                                        speak(macaddress)
+                                        break
+                                elif 'यूट्यूब का वीडियो' in query:
+                                        self.compText.set("खोज चल रही है")
+                                        speak("खोज चल रही है")
+                                        webbrowser.open("http://www.youtube.com/results?search_query="+query)
+                                        break
+
+                                elif 'का चित्र' in query:
+                                        self.compText.set("तैयार कर रहे हैं...")
+                                        speak("तैयार कर रहे हैं...")
+                                        webbrowser.open("https://www.google.com/search?q="+query)
+                                        break
+                                elif 'पाई चार्ट बनाएं' in query:
+                                        self.compText.set('ठीक है मैं बना रहा हूँ…।')
+                                        speak('ठीक है मैं बना रहा हूँ…।')
+                                        activities = ['खाना ', 'नींद', 'काम', 'खेल']
+                                        slices = [3, 7, 8, 6]
+                                        colors = ['r', 'y', 'g', 'b']
+                                        plt.pie(slices, labels = activities, colors=colors, 
+                                            startangle=90, shadow = True, explode = (0, 0, 0.1, 0), 
+                                            radius = 1.2, autopct = '%1.1f%%') 
+                                        plt.legend() 
+                                        plt.show()
+                                        break
+
+                                elif 'ड्रॉ बार ग्राफ' in query:
+                                        self.compText.set('ठीक है ...')
+                                        speak('ठीक है ...')
+                                        x = [1,2,3] 
+                                        y = [2,4,1]  
+                                        plt.plot(x, y)  
+                                        plt.xlabel('x - axis') 
+                                        plt.ylabel('y - axis') 
+                                        plt.show()
+                                        break   
+
+
+                                elif 'आकार बनाओ' in query:
+                                        self.compText.set("बन रहा है|")
+                                        speak("बन रहा है|")
+                                        colors = ['red', 'purple', 'blue', 'green', 'orange', 'yellow'] 
+                                        t = turtle.Pen() 
+                                        turtle.bgcolor('black')
+                                        t.hideturtle()
+                                        t.speed(0)
+                                        for x in range(360): 
+                                                t.pencolor(colors[x%6]) 
+                                                t.width(x/100 + 1) 
+                                                t.forward(x) 
+                                                t.left(59)
+                                        time.sleep(2)
+                                        turtle.Screen().bye()
+                                        break
+                                elif 'ईमेल भेजें' in query:
+                                        fromaddr = "sender address"
+                                        toaddr = "receiver address"
+                                        msg = MIMEMultipart() 
+                                        msg['From'] = fromaddr 
+                                        msg['To'] = toaddr 
+                                        speak("विषय क्या होगा? ?")
+                                        msg['Subject'] =JoCommand()
+                                        speak("संदेश क्या होगा?")
+                                        body = JoCommand()         
+                                        msg.attach(MIMEText(body, 'plain'))         
+                                        filename =JoCommand()
+                                        attachment = open("Path from where you have to send file with extension", "rb") 
+                                        p = MIMEBase('application', 'octet-stream') 
+                                        p.set_payload((attachment).read()) 
+                                        encoders.encode_base64(p) 
+                                        p.add_header('Content-Disposition', "attachment; filename= %s" % filename) 
+                                        msg.attach(p) 
+                                        s = smtplib.SMTP('smtp.gmail.com', 587) 
+                                        s.starttls() 
+                                        s.login(fromaddr, "YOUR_APP_PASSWORD")  # set your own Gmail app password; never commit it 
+                                        text = msg.as_string()
+                                        s.sendmail(fromaddr, toaddr, text)
+                                        print("भेज दिया")
+                                        s.quit()
+                                        break
+
+                                else:
+                                        try:
+                                                try:
+                                                       res=client.query(text)        
+                                                       output=next(res.results).text
+                                                       self.compText.set(output)
+                                                       print(output)
+                                                       speak(output)
+                                                       break 
+                                                except:
+                                                        results = wikipedia.summary(query, sentences=2)
+                                                        self.compText.set('समझ गया।')
+                                                        speak('समझ गया।')
+                                                        self.compText.set('WIKIPEDIA कहता है - ') 
+                                                        speak('WIKIPEDIA कहता है - ') 
+                                                        speak(results)
+                                                        break
+                                        except:
+                                                webbrowser.open("https://www.google.com/search?q="+query)
+                                                break
+                                                
+
+if __name__ == '__main__':
+      greetMe()
+      widget = Widget()   
+        

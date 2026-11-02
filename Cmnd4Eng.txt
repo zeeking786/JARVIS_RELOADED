@@ -1,0 +1,42 @@
+Command For English Assistant
+-----------------------------
+1.Exit,Bye and Sleep
+2.what is my IP address
+3.what is MAC address
+4.open youtube
+5.open google
+6.how do you manage everything
+7.show me the analysis
+8.open gmail
+9.shutdown
+10.open cmd/open command prompt
+11.open notepad
+12.the time
+13.open chrome
+14.hi how are you
+15.what is your name
+16.click my picture
+17.draw pie chart
+18.how is my voice
+19.draw bar graph
+20.go offline
+21.open tutorialspoint
+22.open geeksforgeeks
+23.open javatpoint
+24.play online song (eg:- play online song malang)
+25.play song (eg:- giving command of play song then say song name)
+26.open code
+27.youtube videos of (eg:- youtube videos of comedy)
+28.image of (eg:- image of Eiffel Tower)
+29.make pentagone
+30.send email (subject by voice , compose by voice & file by voice)
+31.solve equation (any equation eg:- x^2+3*x+2=0)
+32.solve integration(any integration question eg:- Integration of x^2*3)
+33.solve derivative (any derivative question eg:- derivative of x^2)
+34.any information through wikipedia (eg:- Anil kapoor wikipedia)
+35.basic maths problem (eg:- multiplication or find the missing values)
+36.weather forecast (eg:-weather forecast of varanasi in India)
+37.greeting from application automatically (according to time)
+38.change language (On button click of GUI)
+39.selection of language through voice (English / Hindi)
+40.If any command is not in the code then automatically it we    do google (eg:- restaurant near me)
